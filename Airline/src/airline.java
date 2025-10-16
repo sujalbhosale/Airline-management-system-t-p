@@ -13,20 +13,20 @@ public class airline {
         Scanner sc = new Scanner(System.in);
 
         try {
-            // 1️⃣ Load and register driver
+            // Load and register driver
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection tempCon = DriverManager.getConnection("jdbc:mysql://localhost:3306/", user, pass);
 
-            // Step 2: Create Database if not exists
+            // Create Database if not exists
             Statement stmt1 = tempCon.createStatement();
             stmt1.executeUpdate("CREATE DATABASE IF NOT EXISTS airline_db");
-            System.out.println("✅ Database checked/created!");
+            System.out.println("Database checked/created!");
 
             tempCon.close();
 
-            // 2️⃣ Establish connection
+            // Establish connection
             Connection con = DriverManager.getConnection(url, user, pass);
-            System.out.println("✅ Connected to Airline Management Database!");
+            System.out.println("Connected to Airline Management Database!");
 
             String createTableQuery = "CREATE TABLE IF NOT EXISTS booking (" +
                 "booking_id INT PRIMARY KEY," +
@@ -37,7 +37,7 @@ public class airline {
             Statement stmtTable = con.createStatement();
             stmtTable.executeUpdate(createTableQuery);
             stmtTable.close();
-            System.out.println("✅ Booking table checked/created!");
+            System.out.println("Booking table checked/created!");
 
             while (true) {
                 System.out.println("\n=== Airline Management Menu ===");
@@ -52,7 +52,7 @@ public class airline {
                 switch (choice) {
 
                     case 1:
-                        // ➕ INSERT Operation
+                        // INSERT Operation
                         System.out.print("Enter Booking ID: ");
                         int bid = sc.nextInt();
                         sc.nextLine();
@@ -79,7 +79,7 @@ public class airline {
                         break;
 
                     case 2:
-                        // 📋 DISPLAY Operation
+                        // DISPLAY Operation
                         String selectQuery = "SELECT * FROM booking";
                         Statement stmt = con.createStatement();
                         ResultSet rs = stmt.executeQuery(selectQuery);
@@ -99,7 +99,7 @@ public class airline {
                         break;
 
                     case 3:
-                        // ✏ UPDATE Operation
+                        // UPDATE Operation
                         System.out.print("Enter Booking ID to update: ");
                         int ubid = sc.nextInt();
                         sc.nextLine();
@@ -123,7 +123,7 @@ public class airline {
                         break;
 
                     case 4:
-                        // ❌ DELETE Operation
+                        // DELETE Operation
                         System.out.print("Enter Booking ID to cancel: ");
                         int dbid = sc.nextInt();
 
@@ -137,14 +137,14 @@ public class airline {
                         break;
 
                     case 5:
-                        // 🚪 EXIT
+                        // EXIT
                         System.out.println("Exiting Airline Management System... Goodbye!");
                         con.close();
                         sc.close();
                         System.exit(0);
 
                     default:
-                        System.out.println("❌ Invalid choice! Try again.");
+                        System.out.println("Invalid choice! Try again.");
                 }
             }
 
